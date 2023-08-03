@@ -36,6 +36,16 @@ type Person struct {
 	Streams []string `json:"streams"`
 }
 
+type PersonProfileInfo struct {
+	ID            string `json:"id"`
+	Email         string `json:"email"`
+	Pronouns      string `json:"pronouns"`
+	GitHubHandle  string `json:"gitHubHandle"`
+	TwitterHandle string `json:"twitterHandle"`
+	Website       any    `json:"website"`
+	PictureURL    string `json:"pictureUrl"`
+}
+
 func TeamsTable() *schema.Table {
 	return &schema.Table{
 		Name:      "galaxies_teams_table",
@@ -49,6 +59,14 @@ func PeopleTable() *schema.Table {
 		Name:      "galaxies_people_table",
 		Resolver:  fetchPeople,
 		Transform: transformers.TransformWithStruct(&Person{}),
+	}
+}
+
+func PeopleProfileInfoTable() *schema.Table {
+	return &schema.Table{
+		Name:      "galaxies_people_profile_info_table",
+		Resolver:  fetchPeopleProfileInfo,
+		Transform: transformers.TransformWithStruct(&PersonProfileInfo{}),
 	}
 }
 
@@ -80,7 +98,29 @@ func fetchPeople(ctx context.Context, meta schema.ClientMeta, parent *schema.Res
 	}
 
 	return nil
+}
 
+func fetchPeopleProfileInfo(ctx context.Context, meta schema.ClientMeta, parent *schema.Resource, res chan<- interface{}) error {
+	c := meta.(*client.Client)
+	store := c.Store
+
+	data, err := store.Get("peopleProfileInfo.json")
+	if err != nil {
+		return err
+	}
+
+	var records map[string]PersonProfileInfo
+	err = json.Unmarshal(data, &records)
+	if err != nil {
+		return err
+	}
+
+	for ID, record := range records {
+		record.ID = ID // Galaxies profile info uses email ID as the map keys, so pull this out.
+		res <- record
+	}
+
+	return nil
 }
 
 func fetchTeams(ctx context.Context, meta schema.ClientMeta, parent *schema.Resource, res chan<- interface{}) error {
