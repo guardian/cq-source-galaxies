@@ -17,6 +17,7 @@ func Plugin() *source.Plugin {
 		Version,
 		schema.Tables{
 			resources.PeopleTable(),
+			resources.PeopleProfileInfoTable(),
 			resources.StreamsTable(),
 			resources.TeamsTable(),
 		},
