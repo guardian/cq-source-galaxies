@@ -14,3 +14,7 @@ gen-docs:
 # All gen targets
 .PHONY: gen
 gen: gen-docs
+
+.PHONY: serve
+serve:
+	AWS_PROFILE=deployTools go run main.go serve
