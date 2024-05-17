@@ -29,11 +29,14 @@ func New(ctx context.Context, logger zerolog.Logger, s specs.Source, opts source
 		return nil, fmt.Errorf("failed to unmarshal plugin spec: %w", err)
 	}
 
+	// Loads credentials from the default credential chain.
+	// Locally, set the AWS_PROFILE environment variable, or run `make serve`.
+	// See https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials.
 	cfg, err := config.LoadDefaultConfig(
 		ctx,
 		config.WithRegion("eu-west-1"),
-		config.WithSharedConfigProfile("deployTools"),
 	)
+
 	if err != nil {
 		return nil, fmt.Errorf("unable to load AWS config, %w", err)
 	}
