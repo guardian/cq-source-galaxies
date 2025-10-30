@@ -1,0 +1,7 @@
+kind: source
+spec:
+  name: docs/tables
+  path: "./cq-source-galaxies"
+  registry: "local"
+  tables: ["*"]
+  destinations: ["null"]

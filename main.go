@@ -1,10 +1,15 @@
 package main
 
 import (
-	"github.com/cloudquery/plugin-sdk/serve"
-	"github.com/guardian/cq-source-galaxies/plugin"
+	"context"
+	"log"
+
+	"github.com/cloudquery/plugin-sdk/v4/serve"
+	"github.com/guardian/cq-source-galaxies/resources/plugin"
 )
 
 func main() {
-	serve.Source(plugin.Plugin())
+	if err := serve.Plugin(plugin.Plugin()).Serve(context.Background()); err != nil {
+		log.Fatalf("failed to serve plugin: %v", err)
+	}
 }

@@ -1,4 +1,4 @@
-# Source Plugin: guardian-galaxies
+# Source Plugin: galaxies
 
 ## Tables
 

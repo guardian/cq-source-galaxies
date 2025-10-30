@@ -1,16 +1,13 @@
-package resources
+package services
 
 import (
 	"context"
 	"encoding/json"
 
-	"github.com/cloudquery/plugin-sdk/schema"
-	"github.com/cloudquery/plugin-sdk/transformers"
+	"github.com/cloudquery/plugin-sdk/v4/schema"
+	"github.com/cloudquery/plugin-sdk/v4/transformers"
 	"github.com/guardian/cq-source-galaxies/client"
 )
-
-// These models reflect the Galaxies data models and will need updating if the
-// underlying models change.
 
 type Team struct {
 	ID                 string `json:"teamId"`
