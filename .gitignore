@@ -17,7 +17,9 @@
 
 .DS_Store
 
+# Build artifacts
 cq-source-galaxies
+cloudquery
 
 dist
 *.log
