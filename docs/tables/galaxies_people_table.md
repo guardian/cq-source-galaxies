@@ -13,3 +13,4 @@ The primary key for this table is **_cq_id**.
 |role|`utf8`|
 |teams|`list<item: utf8, nullable>`|
 |streams|`list<item: utf8, nullable>`|
+|git_hub_handle|`utf8`|
