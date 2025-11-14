@@ -26,11 +26,12 @@ type Stream struct {
 }
 
 type Person struct {
-	Name    string   `json:"name"`
-	EmailID string   `json:"emailId"`
-	Role    string   `json:"role"`
-	Teams   []string `json:"teams"`
-	Streams []string `json:"streams"`
+	Name         string   `json:"name"`
+	EmailID      string   `json:"emailId"`
+	Role         string   `json:"role"`
+	Teams        []string `json:"teams"`
+	Streams      []string `json:"streams"`
+	GitHubHandle *string  `json:"gitHubHandle,omitempty"`
 }
 
 type PersonProfileInfo struct {
